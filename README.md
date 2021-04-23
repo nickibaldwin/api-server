@@ -2,7 +2,7 @@
 
 Heroku: n/a
 
-Github actions: https://github.com/nickibaldwin/basic-express-server/actions
+Github actions: https://github.com/nickibaldwin/api-server/actions
 
-PR: https://github.com/nickibaldwin/basic-api-server/pull/2
+PR: https://github.com/nickibaldwin/api-server/pull/1
 
