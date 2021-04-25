@@ -1,49 +1,62 @@
 'use strict';
 
-// require('@code-fellows/supergoose'); //this pulls in and configs and runs mongo memory server and supertest
+const supergoose = require('@code-fellows/supergoose'); //this pulls in and configs and runs mongo memory server and supertest
 
-// const GenericCollection = require('../models/generic-collections.js');
-// const food = new GenericCollection();
+const { server } = require('../src/server.js');
+const mockServer = supergoose(server);
 
-// describe('Food Actions', () => {
+const clothesSchema = require('../src/models/clothes-schema');
+
+const GenericCollection = require('../src/models/generic-collection.js');
+const clothes = new GenericCollection(clothesSchema);
+
+describe('Clothes Actions', () => {
   
-//   it('can create() a new food item', () => {
-//     let obj = { name: 'test food 1', calories: 9999, type: 'FRUIT '};
-//     let expected = { name: 'test food 1', calories: 9999, type: 'FRUIT'};
+  it('can read()all records', () => {
+    let allClothes = clothes.read();
+    expect(allClothes.length).toEqual(clothes.length);
+    console.log('this should be clothes test 1');
+  });
+  
+  it('can create() a new clothes item', () => {
+    let obj = { name: 'test clothes 2', color: 'BLUE', type: 'PANTS'};
+    let expected = { name: 'test clothes 2', color: 'BLUE', type: 'PANTS'};
 
-//     return food.create(obj)
-//       .then(record => {
-//         Object.keys(obj).forEach(item => { //keys returns an array of all the keys in an object. review this rtechnique for similar object comparison
-//           expect(record[item].toEqual(expected[item])
-//         }) 
-//       });
-//   });
+    return clothes.create(obj)
+      .then(record => {
+        Object.values(obj).forEach(item => {
+          expect(record[item]).toEqual(expected[item]);
+          console.log('this should be test clothes 2', item);
+        });
+      });
+  });
+  
+  it('can read() a single clothes item', () => {
+    let obj = { name: 'test clothes 3', color: 'BLACK', type: 'SHOES'};
+    let expected = { name: 'test clothes 3', color: 'BLACK', type: 'SHOES'};
 
-// //create, then read so that this test is independent from above
-//   it('can read() a single food item', () => {
-//     let obj = { name: 'test food 2', calories: 9999, type: 'VEG '};
-//     let expected = { name: 'test food 2', calories: 9999, type: 'VEG'};
+    return clothes.create(obj)
+      .then(record => {
+        return clothes.read(record._id)
+          .then(item => {
+            expect(record[item]).toEqual(expected[item]);
+            console.log('this should be test clothes 3', item);
+          });
+      });
+  });
+});
 
-//     return food.create(obj)
-//       .then(record => {
-//         return food.read(record._id)
-//           .then(item => {
-//             //=======TODO==========
-//             console.log('this should be test food 2', item);
-//           })
-//       })
-//   })
-//   it('can read() a single item', () => {
+it('can update() a new clothes item', () => {
+  let obj = { name: 'test clothes 4', color: 'RED', type: 'SHOES'};
+  let expected = { name: 'test clothes 4', color: 'RED', type: 'SHOES'};
 
-//   })
-//   it('can delete() a new food item', () => {
+  return clothes.create(obj)
+    .then(record => {
+      return clothes.update(record._id)
+        .then(item => {
+          expect(record[item]).toEqual(expected[item]);
+          console.log('this should be test clothes 4', item);
+        });
+    });
+});
 
-//   })
-//   it('can update() a new food item', () => {
-
-//   })
-
-//   it('validtator something - see front row at 11:36am')
-// });
-
-//DELETE TEST ISN"T REQUIRED TODAY
