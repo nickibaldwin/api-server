@@ -6,13 +6,13 @@ const mongoose = require('mongoose'); //pulls mongoose in
 // const foodCollection = new GenericCollection(food);
 // const clothesSchema = require('./src/models/clothes-schema.js');
 // const clothesCollection = new GenericCollection(clothesSchema);
-const MONGODB_URI = 'mongodb://localhost:27017/food'; //settting up connection string for connecting us to Mongo DB
+// const MONGODB_URI = 'mongodb://localhost:27017/food'; //settting up connection string for connecting us to Mongo DB
 const PORT = process.env.PORT || 3000;
 const server = require('./src/server.js');
 
 const options = { useNewUrlParser: true, unifiedTopology: true } //avoids weird parsing issues, boilderplate!!!
 
 //this connects us to the "food" database
-mongoose.connect(MONGODB_URI, options);
+mongoose.connect(process.env.MONGODB_URI, options);
 
 server.start(PORT);
