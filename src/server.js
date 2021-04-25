@@ -2,9 +2,10 @@
 
 //server.js
 const express = require('express');
-const app = express();
+const app = express();//create the server
 
-const validator = require('./middleware/validator.js');
+//requests come to this file, that's why we use app. a bunch. The variable app is the server
+
 const logger = require('./middleware/logger.js');
 const clothingRoute = require('./routes/clothes-routes.js');
 const foodRoute = require('./routes/food-routes.js');
@@ -12,11 +13,11 @@ const foodRoute = require('./routes/food-routes.js');
 const notFound = require('./error-handlers/404.js');
 const errors = require('./error-handlers/500.js');
 
-const router = express.Router();
+app.use(express.json());
 
-
-app.use(validator);
+//middleware
 app.use(logger);
+
 app.use(clothingRoute);
 app.use(foodRoute);
 
