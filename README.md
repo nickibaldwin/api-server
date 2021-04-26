@@ -65,6 +65,8 @@
 ├── .gitignore
 ├── .eslintrc.json
 ├── __tests__
+│   ├── clothes.test.js
+│   ├── food.test.js
 │   ├── server.test.js
 │   ├── logger.test.js
 ├── src
@@ -73,14 +75,13 @@
 │   │   ├── 500.js
 │   ├── middleware
 │   │   ├── logger.js
-│   │   ├── validator.js
 │   ├── models
-│   │   ├── food.js
-│   │   ├── clothes.js
-│   │   ├── data-collection-class.js
+│   │   ├── clothes-schema.js
+│   │   ├── food-schema.js
+│   │   ├── generic-collection.js
 │   ├── routes
-│   │   ├── food.js
-│   │   ├── clothes.js
+│   │   ├── clothes-routes.js
+│   │   ├── food-routes.js
 │   ├── server.js
 ├── index.js
 └── package.json
